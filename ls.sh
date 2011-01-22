@@ -1,0 +1,11 @@
+# ls
+alias la="ls -lao"
+alias la="ls -lao"
+alias ll="ls -lo"
+alias lm="ls -lao | more"
+alias lsa="ls -lao"
+alias lsl="ls -lo"
+alias lsh="ls -laho"
+alias lss="ls -laho"
+alias lsg="ls | grep "
+alias lstree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
