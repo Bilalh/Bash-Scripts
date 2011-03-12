@@ -32,19 +32,21 @@ function git_cs(){
 		echo "Run on a git repo"
 		return 
 	fi
-	
+
+	user="bh246"
 	prj="$1"
 	prj_git="$1.git"
-	cs_dir="/cs/home/bh246/jh/git"
+	cs_dir="/cs/home/${user}/jh/git"
 	
-	git clone --bare ${prj} ${prj_git}
-	scp -r ${prj_git} bh246@host-bh246.cs.st-andrews.ac.uk:${cs_dir}
-	
-	cd ${prj}
-	git remote add master ssh://bh246@shell.cs.st-andrews.ac.uk${cs_dir}/${prj_git}
-	git remote add origin ssh://bh246@shell.cs.st-andrews.ac.uk${cs_dir}/${prj_git}
-	cd ${OLDPWD}
-	rm ${prj_git}
+	git clone --bare "${prj}" "${prj_git}"
+	scp -r "${prj_git}" ${user}@host-${user}.cs.st-andrews.ac.uk:${cs_dir}
+		
+	cd "${prj}"
+	git remote add origin "ssh://${user}@shell.cs.st-andrews.ac.uk${cs_dir}/${prj_git}"
+	git config branch.master.remote origin
+	git config branch.master.merge refs/heads/master
+	cd "${OLDPWD}"
+	rm -rf "${prj_git}"
 }
 
 alias svne="svn export"

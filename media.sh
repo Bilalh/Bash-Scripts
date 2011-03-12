@@ -14,7 +14,7 @@ function mediaf(){
 	ext="${name##*.}"
 
 	search="";
-	dir=${full};
+	dir="${full}";
 	
 	extra="";
 	if [ ${#ext} -lt ${#name} ]; then
@@ -32,6 +32,9 @@ alias  ay='ax --mplayer'
 alias  ml='ay --last'
 alias mll='ml --none --dot-default'
 alias mlg='ml --dot-default --menu --top '
+alias mlw='ay --un-watched --first --none --dot-default'
+alias mlgw='mlw --menu --top --history --mplayer'
+alias mlwg='mlgw'
 
 alias op='mediah --op --out --mplayer'
 alias opp='op --none --dot-default'

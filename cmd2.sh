@@ -27,20 +27,5 @@ function grepdir () {
 	grep -Pn "$1" *
 }
 
-function labelRecursiveH () {
-	labelRecursive '.' "${1}"
-}
-function labelRecursive () {
-	find "${1}"  \! -name ".DS_Store" -exec setLabel "${2}" '{}' \; -print
-}
-function readDir () {
-	labelRecursive "${1}" blue
-}
-function readF () {
-	readDir "`gf`"
-}
-
-
-alias readH="labelRecursiveH blue";
 alias bat="battery"
 alias gd="grepdir"

@@ -2,7 +2,7 @@
 function csp(){
 	dir="$1"
 	shift
-	scp -r $* bh246@host-bh246.cs.st-andrews.ac.uk:/cs/home/bh246/${dir} 
+	scp -r "$*" "bh246@host-bh246.cs.st-andrews.ac.uk:/cs/home/bh246/${dir}" 
 }
 
 # rsync $1 to $2 
@@ -16,7 +16,6 @@ function rsync_cs () {
 
 alias ws="cd /Users/bilalh/Uni/CS/JH/ws/"
 
-# ssh
 alias stp="ssh cs3099userb@host-cs3099userb.cs.st-andrews.ac.uk"
 alias cs="ssh bh246@host-bh246.cs.st-andrews.ac.uk"
 alias csmount="sshfs bh246@host-bh246.cs.st-andrews.ac.uk: /Users/bilalh/Uni/CS/mount"
@@ -30,18 +29,22 @@ function ssht(){
 # project
 alias jh="cd /Users/bilalh/Uni/CS/JH/ws/development/"
 alias jhs="cd /Users/bilalh/Uni/CS/JH/ws/development/; git status"
-alias jhl="cd /Users/bilalh/Uni/CS/JH/ws/development/; git log"
+alias jhl="cd /Users/bilalh/Uni/CS/JH/ws/development/; git lg"
 
-alias jhg="cs 'cd /cs/home/cs3099userb/git/development/;git log'"
+function jhgd(){
+	cs "cd /cs/home/cs3099userb/git/development/; git ld" | less -R
+}
+
 function jhgp(){
-	cs "cd /cs/home/cs3099userb/git/development/; git log $1 --pretty='%ai %an - %s'"
+	cs "cd /cs/home/cs3099userb/git/development/; git lg $1" | less -R
 }
 
-function jhgg(){
-	cs "cd /cs/home/cs3099userb/git/development/; git lg $1"
+function jr(){
+	cs "cd /cs/home/cs3099userb/git/development/; git lg -n 15 $1"
+	echo
 }
 
-alias jr='jhgg -n10;echo'
+alias otests='jh; open tests_output/index.html'
 
 # old
 # alias ws="open -a X11;cd /Applications/Wireshark.app/Contents/MacOS;sudo ./Wireshark"

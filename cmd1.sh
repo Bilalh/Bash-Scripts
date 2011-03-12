@@ -34,6 +34,7 @@ function cbzr () {
 		cd "$j";  
 		for i in *; do
 			 zip -rq "$i".cbz "$i"  ; 
+			 mv "$i" ../;
 		done; 
 
 		cd $OLDPWD; 
