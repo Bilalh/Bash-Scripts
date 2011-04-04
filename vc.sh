@@ -1,4 +1,3 @@
-alias gitc="git clone git://"
 alias gs="git status"
 alias gl="git log"
 

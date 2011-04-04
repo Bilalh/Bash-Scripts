@@ -1,9 +1,10 @@
+#!/bin/bash
 # Folders 
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias back='cd "$OLDPWD"'
-alias down='cd ~/Downloads'
+
 alias dl='down'
 alias dt="cd ~/Desktop/"
 
@@ -12,6 +13,23 @@ alias open..="open .."
 
 alias hda="hdiutil attach"
 alias hdd="hdiutil detach"
+function rcd {
+	num="`ls | egrep -i \"$1\" -c`"
+	if [ $num -eq 1 ]; then
+		cd "`ls | egrep -i \"$1\" `"
+		pwd
+	elif [ $num -eq 0 ]; then
+		echo ""
+	elif [ $num -lt 30 ]; then
+		select NAME in `ls -d */ | egrep -i "$1" | sed 's/ /§/'`; do
+			cd "${NAME/§/ }"
+			pwd
+			break	
+		done
+	else 
+		echo "Too many items - $num"
+	fi
+}
 
 
 # cdf: cd's to frontmost window of Finder

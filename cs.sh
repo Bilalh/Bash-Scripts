@@ -26,6 +26,7 @@ function ssht(){
 	ssh -N -L $1:localhost:$2 bh246@host-bh246.cs.st-andrews.ac.uk	
 }
 
+alias lsv="cd /Users/bilalh/Uni/CS/JH/CS3202-LSV/coq/"
 # project
 alias jh="cd /Users/bilalh/Uni/CS/JH/ws/development/"
 alias jhs="cd /Users/bilalh/Uni/CS/JH/ws/development/; git status"

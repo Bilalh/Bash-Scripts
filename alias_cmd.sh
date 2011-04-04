@@ -1,5 +1,5 @@
 # Commands alias
-
+alias todo="less ~/Desktop/TODO.txt"
 
 
 alias hidetex="SetFile -a V *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.toc"
