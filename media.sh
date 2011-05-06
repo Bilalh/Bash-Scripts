@@ -1,4 +1,4 @@
-
+#!/bin/bash
 function mediah(){
 	hashfile="/Users/bilalh/Library/Application Support/Media/zzhash"
 	dir="$1";
@@ -27,18 +27,19 @@ function mediaf(){
 
 }
 
-alias  ax='mediah --ax --out --colour-ep --label-watched'
-alias  ay='ax --mplayer'
-alias  ml='ay --last'
-alias mll='ml --none --dot-default'
-alias mlg='ml --dot-default --menu --top '
-alias mlw='ay --un-watched --first --none --dot-default'
+alias   ax='mediah --ax --out --colour-ep --label-watched'
+alias   ay='ax --mplayer'
+alias   ml='ay --last'
+alias  mll='ml --none --dot-default'
+alias  mlg='ml --dot-default --menu --top '
+alias  mlw='ax --un-watched --first --none --dot-default'
 alias mlgw='mlw --menu --top --history --mplayer'
 alias mlwg='mlgw'
 
-alias op='mediah --op --out --mplayer'
-alias opp='op --none --dot-default'
-alias opr="op --top --169 --rnd --framedrop --fast --no-out --dot-default"
+alias   op='mediah --op --out --mplayer'
+alias  opp='op --none --dot-default'
+alias  opr="op --top --169 --rnd --framedrop --fast --no-out --dot-default"
+alias opr1='opr -f -E -vo -E corevideo:device_id=1'
 
 alias shash='shash "/Users/bilalh/Library/Application Support/Media/zzhash"'
 alias numsfs='numss'

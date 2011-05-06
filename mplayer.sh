@@ -1,8 +1,7 @@
-
+#!/bin/bash
 
 
 alias mp="mplayer"
-alias mm="mkvmerge"
 alias mpp="mplayer -profile"
 
 alias mpf="cdf; mplayer *"
@@ -21,10 +20,10 @@ alias mpnl="mpn -l"
 function mpn () {
 	cd "/Users/bilalh/Movies/add/"
 	IFS=$'\x0a';
-	select OPT in `ls -tr | grep -vP 'cover|ςbz|zoff alias| Renaming'` "Cancel"; do
+	select OPT in `ls -tr | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "Cancel"; do
 		if [ "${OPT}" != "Cancel" ]; then
-			if [ $# -gt 0 ]; then ls "${OPT}"; fi;
-			mplayer "${OPT}"/*
+			if [ $# -gt 0 ]; then ls -R "${OPT}"; fi;
+			find "${OPT}" \( -iname "*\.mp3" -o -iname "*\.flac"  -o -iname "*\.m4a" -o -iname "*\.ogg" -o -iname "*\.ac3" -o -iname "*\.wma" \) -exec mplayer '{}' +
 		fi
 		break
 	done

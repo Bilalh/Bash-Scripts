@@ -9,7 +9,7 @@ function mkv_list () {
 	tmkv  -- 
 	tomkv --\n"
 }
-
+alias mm="mkvmerge"
 
 function amkv () {
 	if [ -n "${1}" ]

@@ -14,9 +14,9 @@ alias open..="open .."
 alias hda="hdiutil attach"
 alias hdd="hdiutil detach"
 function rcd {
-	num="`ls | egrep -i \"$1\" -c`"
+	num="`ls -d */ | egrep -i \"$1\" -c`"
 	if [ $num -eq 1 ]; then
-		cd "`ls | egrep -i \"$1\" `"
+		cd "`ls -d */ | egrep -i \"$1\" `"
 		pwd
 	elif [ $num -eq 0 ]; then
 		echo ""

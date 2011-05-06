@@ -26,11 +26,16 @@ function ssht(){
 	ssh -N -L $1:localhost:$2 bh246@host-bh246.cs.st-andrews.ac.uk	
 }
 
-alias lsv="cd /Users/bilalh/Uni/CS/JH/CS3202-LSV/coq/"
 # project
 alias jh="cd /Users/bilalh/Uni/CS/JH/ws/development/"
-alias jhs="cd /Users/bilalh/Uni/CS/JH/ws/development/; git status"
-alias jhl="cd /Users/bilalh/Uni/CS/JH/ws/development/; git lg"
+
+alias rg='reportg'
+function reportg(){
+	pushd "/Users/bilalh/Desktop/jhreport/"  > /dev/null
+	google docs get --title "Final Poker Report" --dest=temp.txt && figures/tex.rb temp.txt  > report.tex && pdflatex -interaction=batchmode report.tex; 
+	popd > /dev/null
+}
+
 
 function jhgd(){
 	cs "cd /cs/home/cs3099userb/git/development/; git ld" | less -R
@@ -45,7 +50,10 @@ function jr(){
 	echo
 }
 
+alias sstate='less -SI "`ls | tail -n 11 | grep "state" | tail -n 1`"'
+alias ssmsg='less -SI "`ls | tail -n 11 | grep "Message" | tail -n 1`"'
+alias sssys='less -SI "`ls | tail -n 11 | grep "System" | tail -n 1`"'
+
 alias otests='jh; open tests_output/index.html'
 
-# old
 # alias ws="open -a X11;cd /Applications/Wireshark.app/Contents/MacOS;sudo ./Wireshark"
