@@ -1,7 +1,5 @@
 # Media Encoding 
 
-# join  mp4 files
-#MP4Box -cat file_01.m4v -cat file_02.m4v -cat file_03.m4v -new final.m4v
 
 #TODO check for types 
 function mkv4 () {

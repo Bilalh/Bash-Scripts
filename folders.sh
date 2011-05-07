@@ -1,18 +1,14 @@
 #!/bin/bash
-# Folders 
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias back='cd "$OLDPWD"'
 
-alias dl='down'
-alias dt="cd ~/Desktop/"
-
 alias open.="open ."
 alias open..="open .."
 
-alias hda="hdiutil attach"
-alias hdd="hdiutil detach"
+
 function rcd {
 	num="`ls -d */ | egrep -i \"$1\" -c`"
 	if [ $num -eq 1 ]; then
@@ -29,6 +25,11 @@ function rcd {
 	else 
 		echo "Too many items - $num"
 	fi
+}
+
+alias gd="grepdir"
+function grepdir () {
+	grep -Pn "$1" *
 }
 
 
@@ -52,6 +53,4 @@ APPLESCRIPT
 
 }
 
-
-
-
+alias tmp="cd /tmp"

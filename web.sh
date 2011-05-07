@@ -1,4 +1,5 @@
 alias wgetf="wget --input-file="
+
 function getyoutube(){
 	cd /tmp
 	now=`date +"%F_%H-%M-%S_%s"`

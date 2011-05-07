@@ -1,31 +1,34 @@
 # Commands 2
 
+# battery left in % 
 function battery () {
 	ioreg -l | grep -i capacity | tr '\n' ' | ' | awk '{printf("%.2f%%\n", $10/$5 * 100)}'
 }
-function cleanh () {
-	cat .bash_history | grep -vP "^(op|ax|ml|mal|mai|ax|mp|mm|cr|cadd|sadd|pgui|ls|man|aes|hd|hfind|hget|geth|nums)(.*)?" >.bash_history
-}
-alias fixh="awk '!x[$0]++' .bash_history > .bash.tmp && mv -f .bash.tmp .bash_history"
+alias bat="battery"
 
-function dict () {
-	 open dict:///"$@" ; 
-}
 
 function findPid () {
 	/usr/sbin/lsof -t -c "$@" ; 
 }
+
 function sudoFindPid () {
 	 sudo /usr/sbin/lsof -t -c "$@" ; 
 }
 
-function fixLines () {
-	# fixlines: edit files in place to ensure Unix line-endings
-	perl -pi~ -e 's/\r\n?/\n/g' "$@" ; 
-}
-function grepdir () {
-	grep -Pn "$1" *
+
+function cleanh () {
+	cat .bash_history | grep -vP "^(op|ax|ml|mal|mai|ax|mp|mm|cr|cadd|sadd|pgui|ls|man|aes|hd|hfind|hget|geth|nums)(.*)?" >.bash_history
 }
 
-alias bat="battery"
-alias gd="grepdir"
+function dhist () {
+	cd ~
+	rm .bash_history
+	>.bash_history
+ 	cd "$OLDPWD"
+}
+
+# get rid of blank lines
+alias fixh="awk '!x[$0]++' .bash_history > .bash.tmp && mv -f .bash.tmp .bash_history"
+
+
+
