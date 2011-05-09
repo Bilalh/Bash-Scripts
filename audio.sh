@@ -3,7 +3,7 @@ alias ww="\`www select\`"
 alias wo="\`www oselect\`"
 function www (){
 	IFS=,; 
-	select opt in `${HOME}/scripts/albums.applescript $1` "Cancel" ; do 
+	select opt in `${HOME}/scripts/albums.applescript $1` " Cancel" ; do 
 		if [ "${opt}" != "Cancel" ]; then 
 			echo "${HOME}/scripts/itunes.sh @ album ${opt}";
 			#"${HOME}/scripts/itunes" @ album ${opt}; 

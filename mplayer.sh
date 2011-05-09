@@ -18,7 +18,7 @@ alias gmkv="cd ~/Desktop/joinMkv/"
 
 alias mpnl="mpn -l"
 function mpn () {
-	cd "~/Movies/add/"
+	cd "$HOME/Movies/add/"
 	IFS=$'\x0a';
 	select OPT in `ls -tr | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "Cancel"; do
 		if [ "${OPT}" != "Cancel" ]; then
