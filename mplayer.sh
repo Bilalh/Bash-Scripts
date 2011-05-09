@@ -18,9 +18,11 @@ alias gmkv="cd ~/Desktop/joinMkv/"
 
 alias mpnl="mpn -l"
 function mpn () {
+	export LC_ALL='C'
 	cd "$HOME/Movies/add/"
 	IFS=$'\x0a';
 	select OPT in `ls -tr | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "Cancel"; do
+		unset LC_ALL
 		if [ "${OPT}" != "Cancel" ]; then
 			if [ $# -gt 0 ]; then ls -R "${OPT}"; fi;
 			find "${OPT}" \( -iname "*\.mp3" -o -iname "*\.flac"  -o -iname "*\.m4a" -o -iname "*\.ogg" -o -iname "*\.ac3" -o -iname "*\.wma" \) -exec mplayer '{}' +
