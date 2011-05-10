@@ -27,25 +27,29 @@ function s {
     fi
 }
 
-# open dir in finder
+# open the specifed bookmark
 function o {
-	cmd="$1"
-    shift
-	check_help ${cmd} 
-    source $SDIRS
-    open "$(eval $(echo echo $(echo \$DIR_${cmd})))";
-    cd "$(eval $(echo echo $(echo \$DIR_${cmd})))";	
-	pwd; $*
+    if [ -z $1 ]; then
+		bashmarks_list
+    else
+		check_help $1
+        source $SDIRS
+        open "$(eval $(echo echo $(echo \$DIR_$1)))"
+        cd "$(eval $(echo echo $(echo \$DIR_$1)))"
+		pwd; shift; $*
+    fi
 }
-
 
 # jump to bookmark
 function g {
-	cmd="$1"
-    shift
-	check_help ${cmd} 
-    source $SDIRS
-    cd "$(eval $(echo echo $(echo \$DIR_${cmd})))"; pwd; $*
+    if [ -z $1 ]; then
+		_bookmarks
+    else
+		check_help $1
+        source $SDIRS
+        cd "$(eval $(echo echo $(echo \$DIR_$1)))"
+		pwd; shift; $*
+    fi
 }
 
 # print bookmark
@@ -74,13 +78,14 @@ function check_help {
         echo 'g <bookmark_name> - Goes (cd) to the directory associated with "bookmark_name"'
         echo 'p <bookmark_name> - Prints the directory associated with "bookmark_name"'
         echo 'd <bookmark_name> - Deletes the bookmark'
-        echo 'l                 - Lists all available bookmarks'
+        echo 'l | g             - Lists all available bookmarks'
         kill -SIGINT $$
     fi
 }
 
 # list bookmarks with dirnam
-function l {
+alias l='_bookmarks'
+function _bookmarks {
     check_help $1
     source $SDIRS
         
@@ -90,6 +95,7 @@ function l {
     # uncomment this line if color output is not working with the line above
     # env | grep "^DIR_" | cut -c5- | sort |grep "^.*=" 
 }
+
 # list bookmarks without dirname
 function _l {
     source $SDIRS
