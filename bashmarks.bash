@@ -33,7 +33,9 @@ function o {
     shift
 	check_help ${cmd} 
     source $SDIRS
-    open "$(eval $(echo echo $(echo \$DIR_${cmd})))"; $*
+    open "$(eval $(echo echo $(echo \$DIR_${cmd})))";
+    cd "$(eval $(echo echo $(echo \$DIR_${cmd})))";	
+	pwd; $*
 }
 
 
@@ -43,7 +45,7 @@ function g {
     shift
 	check_help ${cmd} 
     source $SDIRS
-    cd "$(eval $(echo echo $(echo \$DIR_${cmd})))"; $*
+    cd "$(eval $(echo echo $(echo \$DIR_${cmd})))"; pwd; $*
 }
 
 # print bookmark
