@@ -19,7 +19,7 @@ function mkvspilt () {
 
 function mkvvideo () {
 	Type=`mediainfo "$1" | grep -A 2 'Video' | grep 'Format' | head -n 1 | grep -oP '(?<=:).*' | grep -oP '\w+'`
-	Video=`MediaIn1fo "$1" | grep -A 1 Video | grep ID | grep -oP "\d+"`
+	Video=`MediaInfo "$1" | grep -A 1 Video | grep ID | grep -oP "\d+"`
 	name=`echo ${1} | sed 's/.mkv//g'` #removes file ext
 	mkvextract tracks "$1" ${Video}:"${1%.*}.${Type}"
 }
@@ -53,12 +53,12 @@ function mp4get () {
 	mp4box -single "${1}" "${2}"
 }
 
-function getmp4audio(){
+function mp4audio(){
 	Id=`MediaInfo "$1" | grep -A 1 Audio | grep ID | grep -oP "\d+"`
 	mp4get "${Id}" "$1"
 }
 
-function getmp4video(){
+function mp4video(){
 	Id=`MediaInfo "$1" | grep -A 1 Video | grep ID | grep -oP "\d+"`
 	mp4get "${Id}" "$1"
 }
@@ -99,12 +99,6 @@ function videotype () {
 	mediainfo "$1" | grep -A 2 'Video' | grep 'Format' | head -n 2
 }
 
-function videotypeS () {
-	mediainfo "$1" | grep -A 2 'Video' | grep 'Format' | head -n 1 | grep -oP '(?<=:).*' | grep -oP '\w+'
-}
-function videotype () {
-	mediainfo "$1" | grep -A 2 'Video' | grep 'Format' | head -n 2
-}
 
 function aacToMp3_old() {
 	ffmpeg -i "$1" -acodec mp3 -ac 2 -ab 196608 "${1%.*}.mp3"
@@ -116,3 +110,5 @@ function trash () {
 	fi
 	mv "$1" ".Trash/$1"
 }
+
+

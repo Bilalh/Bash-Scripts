@@ -8,10 +8,12 @@ function mif () {
 	mediainfo "`gf`"
 }
 
+# audio tracks bit rate of selected finder item
 function br () {
 	mif | grep -A12 '^Audio' | grep -iP "Format\s{2,}|Duration|Bit rate( mode)?|Sampling rate"
 }
 
+# audio track bit rate of a file
 function gbr () {
 	mi "$1" | grep -A12 '^Audio' | grep -iP "Format\s{2,}|Duration|Bit rate( mode)?|Sampling rate"
 }
@@ -20,14 +22,18 @@ function brn(){
 	gbr "$1" | grep -P 'Bit rate\s+:' | grep -Po '\d+.*'
 }
 
+
+# bit rate of every audio file in a directory
 function brd () {
-	for i in *; do
+	IFS=$'\x0a';	
+	for i in `ack --music -g .` ; do
+	unset IFS
 		printf "\033[0m\033[34m%-60s\033[0m \033[0m\033[32m" "$i";
 		info="`mediainfo \"$i\" | grep -A12 '^Audio' | grep -iP '^Bit rate( mode)?'`"
 		a="`echo \"$info\" | grep -oP '\d+.*' `"
-		printf "%s " $a
-		echo $info | grep -oP '\w+ (?=Bit rate)'
-		printf "\033[0m"
+		printf "%s " "$a"
+		echo "$info" | grep -oP '\w+ (?=Bit rate)'
+		printf "\033[0m\n"
 	done
 	echo
 }

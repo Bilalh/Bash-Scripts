@@ -17,19 +17,22 @@ alias mgg="mplayer -geometry 0:0 -xy"
 alias gmkv="cd ~/Desktop/joinMkv/"
 
 alias mpnl="mpn -l"
+alias mpns="mpn -shuffle"
 function mpn () {
-	export LC_ALL='C'
-	cd "$HOME/Movies/add/"
+	export LC_ALL='C';
 	IFS=$'\x0a';
-	select OPT in `ls -tr | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "Cancel"; do
+	cd "$HOME/Movies/add/" 
+
+	select OPT in `ls -tr | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "." "Cancel"; do
 		unset LC_ALL
 		if [ "${OPT}" != "Cancel" ]; then
-			if [ $# -gt 0 ]; then ls -R "${OPT}"; fi;
-			find "${OPT}" \( -iname "*\.mp3" -o -iname "*\.flac"  -o -iname "*\.m4a" -o -iname "*\.ogg" -o -iname "*\.ac3" -o -iname "*\.wma" \) -exec mplayer '{}' +
+			if [ "$1x" == "-lx" ]; then ls -R "${OPT}"; shift; fi;
+			find "${OPT}" \( -iname "*\.mp3" -o -iname "*\.flac"  -o -iname "*\.m4a" -o -iname "*\.ogg" -o -iname "*\.ac3" -o -iname "*\.wma" \) -exec mplayer $* '{}' +
 		fi
-		break
+		break;
 	done
-	unset IFS
+	unset IFS;
+	cd $OLDPWD	
 }
 
 

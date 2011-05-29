@@ -7,14 +7,6 @@ function battery () {
 alias bat="battery"
 
 
-function findPid () {
-	/usr/sbin/lsof -t -c "$@" ; 
-}
-
-function sudoFindPid () {
-	 sudo /usr/sbin/lsof -t -c "$@" ; 
-}
-
 
 function cleanh () {
 	cat .bash_history | grep -vP "^(op|ax|ml|mal|mai|ax|mp|mm|cr|cadd|sadd|pgui|ls|man|aes|hd|hfind|hget|geth|nums)(.*)?" >.bash_history
