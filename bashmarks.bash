@@ -37,6 +37,7 @@ function o {
         open "$(eval $(echo echo $(echo \$DIR_$1)))"
         cd "$(eval $(echo echo $(echo \$DIR_$1)))"
 		pwd; shift; $*
+		osascript -e 'tell application "Finder"' -e 'activate' -e 'end tell'
     fi
 }
 

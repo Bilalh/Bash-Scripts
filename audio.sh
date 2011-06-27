@@ -1,6 +1,7 @@
 #!/bin/bash
-alias ww="\`www select\`"
-alias wo="\`www oselect\`"
+alias ww="'${HOME}/scripts/itunes.sh' shuffle off; \`www zselect1\` "
+alias w2="'${HOME}/scripts/itunes.sh' shuffle off; \`www zselect2\` "
+alias wo="'${HOME}/scripts/itunes.sh' shuffle off; \`www zselect0\`"
 function www (){
 	IFS=,; 
 	select opt in `${HOME}/scripts/albums.applescript $1` " Cancel" ; do 
