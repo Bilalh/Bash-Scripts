@@ -23,22 +23,6 @@ function brn(){
 }
 
 
-# bit rate of every audio file in a directory
-function brd () {
-	IFS=$'\x0a';	
-	for i in `ack --music -g .` ; do
-	unset IFS
-		printf "\033[0m\033[34m%-60s\033[0m \033[0m\033[32m" "$i";
-		info="`mediainfo \"$i\" | grep -A12 '^Audio' | grep -iP '^Bit rate( mode)?'`"
-		a="`echo \"$info\" | grep -oP '\d+.*' `"
-		printf "%s " "$a"
-		echo "$info" | grep -oP '\w+ (?=Bit rate)'
-		printf "\033[0m\n"
-	done
-	echo
-}
-
-
 function vbr(){
 	mif | grep -A22 '^Video' | grep -Pi "^Format\s{2,}|Width|Height|Writing library|Duration|Bit rate( mode)?" | grep -v 'AAC'
 }

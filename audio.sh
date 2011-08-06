@@ -1,13 +1,20 @@
 #!/bin/bash
-alias ww="'${HOME}/scripts/itunes.sh' shuffle off; \`www zselect1\` "
-alias w2="'${HOME}/scripts/itunes.sh' shuffle off; \`www zselect2\` "
-alias wo="'${HOME}/scripts/itunes.sh' shuffle off; \`www zselect0\`"
+alias ww="www zselect1"
+alias w2="www zselect2"
+alias wo="www zselect0"
+
+function n(){
+	num=${1:-1}
+	www "zselect${num}"
+}
+
 function www (){
 	IFS=,; 
 	select opt in `${HOME}/scripts/albums.applescript $1` " Cancel" ; do 
 		if [ "${opt}" != "Cancel" ]; then 
-			echo "${HOME}/scripts/itunes.sh" @ album "${opt}";
-			#"${HOME}/scripts/itunes" @ album ${opt}; 
+			echo "${HOME}/scripts/itunes.sh" @ album "${opt/ /}";
+			${HOME}/scripts/itunes.sh shuffle off
+			${HOME}/scripts/itunes.sh @ album ${opt/ /}; 
 			break;
 		fi; 
 		break; 
@@ -36,6 +43,25 @@ function avg_bit_rate(){
 
 
 function af(){
-	#info="`afinfo \"$(gf)\" `"
-	afinfo "`gf`"
+	afinfo "`gf`" 
+}
+
+function afr(){
+	afinfo "`gf`" | grep 'bit rate'
+}
+
+
+# bit rate of every audio file in a directory
+function brd () {
+	IFS=$'\x0a';	
+	for i in `ack --music -g .` ; do
+	unset IFS
+		printf "\033[0m\033[34m%-60s\033[0m \033[0m\033[32m" "$i";
+		info="`mediainfo \"$i\" | grep -A12 '^Audio' | grep -iP '^Bit rate( mode)?'`"
+		a="`echo \"$info\" | grep -oP '\d+.*' `"
+		printf "%s " "$a"
+		echo "$info" | grep -oP '\w+ (?=Bit rate)'
+		printf "\033[0m\n"
+	done
+	echo
 }

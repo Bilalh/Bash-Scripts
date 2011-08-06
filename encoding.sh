@@ -20,7 +20,6 @@ function mkvspilt () {
 function mkvvideo () {
 	Type=`mediainfo "$1" | grep -A 2 'Video' | grep 'Format' | head -n 1 | grep -oP '(?<=:).*' | grep -oP '\w+'`
 	Video=`MediaInfo "$1" | grep -A 1 Video | grep ID | grep -oP "\d+"`
-	name=`echo ${1} | sed 's/.mkv//g'` #removes file ext
 	mkvextract tracks "$1" ${Video}:"${1%.*}.${Type}"
 }
 

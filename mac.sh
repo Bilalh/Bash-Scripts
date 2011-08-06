@@ -1,3 +1,10 @@
+# battery left in % 
+function battery () {
+	ioreg -l | grep -i capacity | tr '\n' ' | ' | awk '{printf("%.2f%%\n", $10/$5 * 100)}'
+}
+alias bat="battery"
+
+
 function ql () {
 	#Display the Quick Look preview for the given file.
 	if [ -z "$1" ] ; then
