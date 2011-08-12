@@ -1,3 +1,4 @@
+#!/bin/bash
 # Media Encoding 
 
 
@@ -10,6 +11,7 @@ function mkv4 () {
 	name=`echo ${1} | sed 's/.mkv//g'` #removes file ext
 	if [ -e /tmp/temp.AVC ]; then mv /tmp/temp.AVC /tmp/temp.h264 ; fi
 	MP4Box -add /tmp/temp.AAC -add /tmp/temp.h264 -fps $Fps "$name.mp4"
+	mkvsub "$1"
 }
 
 function mkvspilt () {
@@ -32,7 +34,8 @@ function mkvaudio () {
 
 function mkvsub () {
 	Subs=`MediaInfo "$1" | grep -A 1 Text | grep ID | head -n 1 | grep -oP "\d+"`
-	mkvextract tracks "$1" ${Subs}:a.ssa
+	Name=${2:-${1%.*}}
+	mkvextract tracks "$1" ${Subs}:${Name}.ssa
 }
 
 function aac () {
