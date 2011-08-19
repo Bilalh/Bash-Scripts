@@ -25,3 +25,8 @@ alias hda="hdiutil attach"
 alias hdd="hdiutil detach"
 
 alias o.="open ."
+
+function showinfinder() {
+osascript "/path/to/the/script/FinderSelect.scpt" \
+"Current_path:`pwd`" "$*"
+}
