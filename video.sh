@@ -27,14 +27,5 @@ function vbr(){
 	mif | grep -A22 '^Video' | grep -Pi "^Format\s{2,}|Width|Height|Writing library|Duration|Bit rate( mode)?" | grep -v 'AAC'
 }
 
-N900="/Volumes/NOKIA_N900"
-function n900_sync (){
-	itunes_sync "${N900}/Music/" | tee "${N900}/Music/_logs/`date +'%Y-%m-%d_%s.log'`"
-}
 
-function itunes_sync () {
-	cd "/Users/bilalh/Programming/Ruby/itunes_sync/"
-	macruby itunes_sync.rb $*
-	cd "$OLDPWD"
-}
 
