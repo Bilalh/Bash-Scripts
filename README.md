@@ -1,15 +1,18 @@
-Bash-Scripts 
-============
-A collection of functions and aliases:
+Shell Utilities {#readmeTitle}
+===============
+A collection of scripts and alias for use at command line. Includes a function to extract any kind archive (save you from remembering all the tar flags) and finding your ip. Also includes scripts for for the bit rate and other information from audio files.
+{#description}
 
-ps.sh
+
+
+Usage & Prerequisites
 -----
-Collection of functions to do with ps 
+See the script for details 	
 
-encoding.sh
------------
-Collection of functions to with encoding video and audio
+Install 
+-------
+* Source from your .bashrc
 
-archives.sh
------------
-Functions such `extract` which can extract any type of archive 
+Issues
+------
+None Yet

@@ -65,3 +65,8 @@ function brd () {
 	done
 	echo
 }
+
+
+function aac_to_mp3(){
+	faad -o - "$1" | lame - "${1%.m4a}.mp3"
+}
