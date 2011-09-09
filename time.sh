@@ -9,7 +9,7 @@ datestamp(){
 	echo "$t" | pbcopy 
 }
 ndatestamp(){
-	t="`date +'%a %b %d %Y %k:%M:%S %z'`"
+	t="`date +'%a %d %b %Y %k:%M:%S %z'`"
 	echo "$t"
 	echo "$t" | pbcopy 
 }

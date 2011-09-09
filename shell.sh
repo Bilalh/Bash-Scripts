@@ -11,7 +11,7 @@ function spacesToUnderscore () {
 	done;
 }
 
+# fixlines: edit files in place to ensure Unix line-endings
 function fixLines () {
-	# fixlines: edit files in place to ensure Unix line-endings
 	perl -pi~ -e 's/\r\n?/\n/g' "$@" ; 
 }

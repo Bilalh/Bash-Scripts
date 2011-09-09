@@ -1,20 +1,21 @@
 #!/bin/bash
 alias ww="www zselect1"
 alias w2="www zselect2"
+alias w3="www zselect3"
 alias wo="www zselect0"
 
 function n(){
-	num=${1:-1}
+	num=${1:-3}
 	www "zselect${num}"
 }
 
 function www (){
 	IFS=,; 
-	select opt in `${HOME}/scripts/albums.applescript $1` " Cancel" ; do 
+	select opt in "Cancel" `albums.applescript $1`; do 
 		if [ "${opt}" != "Cancel" ]; then 
-			echo "${HOME}/scripts/itunes.sh" @ album "${opt/ /}";
-			${HOME}/scripts/itunes.sh shuffle off
-			${HOME}/scripts/itunes.sh @ album ${opt/ /}; 
+			echo "itunes.sh" @ album "${opt/ /}";
+			itunes.sh shuffle off
+			itunes.sh @ album ${opt/ /}; 
 			break;
 		fi; 
 		break; 
@@ -73,11 +74,11 @@ function aac_to_mp3(){
 
 N900="/Volumes/NOKIA_N900"
 function n900_sync (){
-	itunes_sync "${N900}/Music/" | tee "${N900}/Music/_logs/`date +'%Y-%m-%d_%s.log'`"
+	itunes_sync "${N900}/Music/" $* | tee "${N900}/Music/_logs/`date +'%Y-%m-%d_%s.log'`"
 }
 
 function itunes_sync () {
-	cd "/Users/bilalh/Programming/Ruby/itunes_sync/"
+	cd "/Users/bilalh/Programming/Projects/Audio-Sync/" 
 	macruby itunes_sync.rb $*
 	cd "$OLDPWD"
 }

@@ -12,8 +12,9 @@ function resample(){
 
 function cover(){
 	filename="`gf`"
-	resampleHeight 1200 $filename
-	resample 75 $filename
+	resampleHeight 1200 "$filename"
+	
+	resample 75 "$filename"
 }
 
 function coverBatch(){
