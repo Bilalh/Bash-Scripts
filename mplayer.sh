@@ -43,3 +43,26 @@ function mpn () {
 	unset IFS;
 	cd "$OLDPWD"
 }
+
+# control mplayer though the pipe 
+function mc (){
+	echo "$*" > ~/.mplayer/pipe 
+}
+
+function mo (){
+	num=$1
+	[ $# -lt 1 ] && num=5
+	tail -n${num} ~/.mplayer/output
+}
+
+function mco(){
+	mc "$*"
+	sleep 0.2
+	mo
+}
+
+alias mstart='last_fm_scrobble_on_mplayer_played_50'
+function mend(){
+	killall last_fm_scrobble_on_mplayer_played_50
+	kill $(ps aux | grep lastfmsubmitd | grep -v grep  | awk '{print $2}');
+}
