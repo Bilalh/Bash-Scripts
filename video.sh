@@ -28,4 +28,7 @@ function vbr(){
 }
 
 
+function length () {
+	mediaInfo --Inform='Video;%Duration/String3%' "$1" | sed "s/\.[0-9][0-9]*$//"
+}
 
