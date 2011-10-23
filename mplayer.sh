@@ -52,8 +52,12 @@ function mpn () {
 function mpm(){
 	dir=${MPM_DIR:-$HOME/Movies/add/}
 	cd "$dir" 
-	trap "" INT
+	export USE_TAGINFO=true
+	trap "killall last_fm_scrobble_on_mplayer_played_50; unset USE_TAGINFO" INT
 	
+	killall last_fm_scrobble_on_mplayer_played_50 &> /dev/null
+    last_fm_scrobble_on_mplayer_played_50 &
+
 	export LC_ALL='C';
 	IFS=$'\x0a';
 	select OPT in `ls | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "." "Cancel"; do
