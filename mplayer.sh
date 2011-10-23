@@ -18,6 +18,12 @@ alias gmkv="cd ~/Desktop/joinMkv/"
 alias mpnl="mpn -l"
 alias mpns="mpn -shuffle"
 
+function mpo(){
+	export USE_TAGINFO=true
+	trap "unset USE_TAGINFO" SIGHUP SIGINT SIGTERM
+	mplayer -input conf=input_with_last_fm.conf -input file=~/.mplayer/pipe "$@" > ~/.mplayer/output 
+	unset USE_TAGINFO
+}
 # Allows the user to choice a director to play music from
 # also scrobble to last.fm 
 # works with unicode and whitespace
@@ -43,7 +49,39 @@ function mpn () {
 	cd "$OLDPWD"
 }
 
+function mpm(){
+	dir=${MPM_DIR:-$HOME/Movies/add/}
+	cd "$dir" 
+	trap "" INT
+	
+	export LC_ALL='C';
+	IFS=$'\x0a';
+	select OPT in `ls | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "." "Cancel"; do
+		unset LC_ALL
+		if [ "${OPT}" != "Cancel" ]; then
+			if [ "$1x" == "-lx" ]; then ls -R "${OPT}"; shift; fi;
+			mpo "`pwd`/${OPT}"/*
+		fi
+		break;
+	done
+	unset IFS;
+	cd "$OLDPWD"
+}
+
+alias n3='n 3'
+alias n2='n 2'
+alias n1='n 1'
+alias n0='n 0
+'
 function n(){
+	num=${1:-3}
+	MPM_DIR="$HOME/Movies/cache/${num}"
+	trap "unset MPM_DIR" SIGHUP SIGINT SIGTERM
+	mpm
+	unset MPM_DIR
+}
+
+function nm(){
 	num=${1:-3}
 	MPN_DIR="$HOME/Movies/cache/${num}/"
 	trap "unset MPN_DIR" SIGHUP SIGINT SIGTERM
