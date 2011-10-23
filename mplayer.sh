@@ -53,7 +53,7 @@ function mpm(){
 	dir=${MPM_DIR:-$HOME/Movies/add/}
 	cd "$dir" 
 	export USE_TAGINFO=true
-	trap "killall last_fm_scrobble_on_mplayer_played_50; unset USE_TAGINFO" INT
+	trap "mend; unset USE_TAGINFO" SIGHUP SIGINT SIGTERM 
 	
 	killall last_fm_scrobble_on_mplayer_played_50 &> /dev/null
     last_fm_scrobble_on_mplayer_played_50 &
@@ -114,6 +114,5 @@ function mco(){
 alias mstart='last_fm_scrobble_on_mplayer_played_50'
 function mend(){
     killall last_fm_scrobble_on_mplayer_played_50
-	killall mplayer2
     kill $(ps aux | grep lastfmsubmitd | grep -v grep  | awk '{print $2}');
 }
