@@ -13,3 +13,6 @@ ndatestamp(){
 	echo "$t"
 	echo "$t" | pbcopy 
 }
+cdatestamp(){
+	date +'%a %d %b %Y'
+}

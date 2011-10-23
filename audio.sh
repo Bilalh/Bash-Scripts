@@ -1,10 +1,6 @@
 #!/bin/bash
-alias ww="www zselect1"
-alias w2="www zselect2"
-alias w3="www zselect3"
-alias wo="www zselect0"
 
-function n(){
+function nn(){
 	num=${1:-3}
 	www "zselect${num}"
 }

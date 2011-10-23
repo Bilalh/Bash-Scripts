@@ -1,18 +1,17 @@
 #!/bin/bash
 
-
-alias mp="mplayer"
+alias mp="mplayer -really-quiet"
 alias mpp="mplayer -profile"
 
 alias mpf="cdf; mplayer *"
 alias mpfl="cdf;ls; mplayer *"
 
-alias mpg='mplayer "`gf`"'
+alias mpg='mp "`gf`"'
 
-alias mpt="mplayer -profile t"
-alias mfs="mplayer -profile fs"
-alias mpl="mplayer -playlist"
-alias mgg="mplayer -geometry 0:0 -xy"
+alias mpt="mp -profile t"
+alias mfs="mp -profile fs"
+alias mpl="mp -playlist"
+alias mgg="mp -geometry 0:0 -xy"
 
 alias gmkv="cd ~/Desktop/joinMkv/"
 
@@ -44,25 +43,35 @@ function mpn () {
 	cd "$OLDPWD"
 }
 
+function n(){
+	num=${1:-3}
+	MPN_DIR="$HOME/Movies/cache/${num}/"
+	trap "unset MPN_DIR" SIGHUP SIGINT SIGTERM
+	mpn
+	unset MPN_DIR
+}
+
+
 # control mplayer though the pipe 
 function mc (){
-	echo "$*" > ~/.mplayer/pipe 
+    echo "$*" > ~/.mplayer/pipe
 }
-
+ 
 function mo (){
-	num=$1
-	[ $# -lt 1 ] && num=5
-	tail -n${num} ~/.mplayer/output
+    num=$1
+    [ $# -lt 1 ] && num=5
+    tail -n${num} ~/.mplayer/output
 }
-
+ 
 function mco(){
-	mc "$*"
-	sleep 0.2
-	mo
+    mc "$*"
+    sleep 0.2
+    mo
 }
-
+ 
 alias mstart='last_fm_scrobble_on_mplayer_played_50'
 function mend(){
-	killall last_fm_scrobble_on_mplayer_played_50
-	kill $(ps aux | grep lastfmsubmitd | grep -v grep  | awk '{print $2}');
+    killall last_fm_scrobble_on_mplayer_played_50
+	killall mplayer2
+    kill $(ps aux | grep lastfmsubmitd | grep -v grep  | awk '{print $2}');
 }
