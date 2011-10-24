@@ -19,7 +19,7 @@ alias mpns="mpn -shuffle"
 function mpo(){
 	export USE_TAGINFO=true
 	trap "unset USE_TAGINFO" SIGHUP SIGINT SIGTERM
-	mplayer -input conf=input_with_last_fm.conf -input file=~/.mplayer/pipe "$@" > ~/.mplayer/output 
+	mplayer -input conf=input_with_last_fm.conf -input file=~/.mplayer/pipe "$@" 2>&1  | tee ~/.mplayer/output | grep '^# ' 
 	unset USE_TAGINFO
 }
 # Allows the user to choice a director to play music from
@@ -63,7 +63,8 @@ function mpm(){
 		unset LC_ALL
 		if [ "${OPT}" != "Cancel" ]; then
 			if [ "$1x" == "-lx" ]; then ls -R "${OPT}"; shift; fi;
-			mpo -input conf=input_with_last_fm_for_audio.conf "`pwd`/${OPT}"/*
+			#mpo -input conf=input_with_last_fm_for_audio.conf "`pwd`/${OPT}"/*
+			mpo -input conf=input_with_last_fm_for_audio.conf  -playlist <(find "$PWD/$OPT" -type f)
 		fi
 		break;
 	done
