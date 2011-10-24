@@ -13,8 +13,6 @@ alias mfs="mp -profile fs"
 alias mpl="mp -playlist"
 alias mgg="mp -geometry 0:0 -xy"
 
-alias gmkv="cd ~/Desktop/joinMkv/"
-
 alias mpnl="mpn -l"
 alias mpns="mpn -shuffle"
 
@@ -53,7 +51,8 @@ function mpm(){
 	dir=${MPM_DIR:-$HOME/Movies/add/}
 	cd "$dir" 
 	export USE_TAGINFO=true
-	trap "mend; unset USE_TAGINFO" SIGHUP SIGINT SIGTERM 
+	export DISPLAY_TRACK_INFO=false
+	trap "mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO" SIGHUP SIGINT SIGTERM 
 	
 	killall last_fm_scrobble_on_mplayer_played_50 &> /dev/null
     last_fm_scrobble_on_mplayer_played_50 &
@@ -64,7 +63,7 @@ function mpm(){
 		unset LC_ALL
 		if [ "${OPT}" != "Cancel" ]; then
 			if [ "$1x" == "-lx" ]; then ls -R "${OPT}"; shift; fi;
-			mpo "`pwd`/${OPT}"/*
+			mpo -input conf=input_with_last_fm_for_audio.conf "`pwd`/${OPT}"/*
 		fi
 		break;
 	done
