@@ -54,8 +54,8 @@ function mpm(){
 	export DISPLAY_TRACK_INFO=false
 	trap "mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO" SIGHUP SIGINT SIGTERM 
 	
-	killall last_fm_scrobble_on_mplayer_played_50 &> /dev/null
-    last_fm_scrobble_on_mplayer_played_50 &
+	killall last_fm_scrobble_on_mplayer_played_50_with_info &> /dev/null
+    last_fm_scrobble_on_mplayer_played_50_with_info &
 
 	export LC_ALL='C';
 	IFS=$'\x0a';
@@ -64,7 +64,8 @@ function mpm(){
 		if [ "${OPT}" != "Cancel" ]; then
 			if [ "$1x" == "-lx" ]; then ls -R "${OPT}"; shift; fi;
 			#mpo -input conf=input_with_last_fm_for_audio.conf "`pwd`/${OPT}"/*
-			mpo -input conf=input_with_last_fm_for_audio.conf  -playlist <(find "$PWD/$OPT" -type f)
+			mpo -input conf=input_with_last_fm_for_audio.conf  -playlist <(find "$PWD/$OPT" -type f \
+			\( -iname "*\.mp3" -o -iname "*\.flac"  -o -iname "*\.m4a" -o -iname "*\.ogg"  -o -iname "*\.wma" \) )
 		fi
 		break;
 	done
@@ -113,6 +114,6 @@ function mco(){
  
 alias mstart='last_fm_scrobble_on_mplayer_played_50'
 function mend(){
-    killall last_fm_scrobble_on_mplayer_played_50
+    killall last_fm_scrobble_on_mplayer_played_50 last_fm_scrobble_on_mplayer_played_50_with_info
     kill $(ps aux | grep lastfmsubmitd | grep -v grep  | awk '{print $2}');
 }
