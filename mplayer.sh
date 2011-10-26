@@ -47,24 +47,30 @@ function mpn () {
 	cd "$OLDPWD"
 }
 
+# Newer version of mpn allow shuffling, mplayer options and previous/next track
 function mpm(){
 	dir=${MPM_DIR:-$HOME/Movies/add/}
 	cd "$dir" 
 	export USE_TAGINFO=true
 	export DISPLAY_TRACK_INFO=false
-	trap "mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO" SIGHUP SIGINT SIGTERM 
-	
+	trap "unset IFS; mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO;return" SIGHUP SIGINT SIGTERM 
+		
 	killall last_fm_scrobble_on_mplayer_played_50_with_info &> /dev/null
-    last_fm_scrobble_on_mplayer_played_50_with_info &
 
 	export LC_ALL='C';
 	IFS=$'\x0a';
-	select OPT in `ls | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "." "Cancel"; do
+	select OPT in `ls | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "." ". -shuffle" "Cancel"; do
 		unset LC_ALL
 		if [ "${OPT}" != "Cancel" ]; then
+			name=""; args=""
 			if [ "$1x" == "-lx" ]; then ls -R "${OPT}"; shift; fi;
-			#mpo -input conf=input_with_last_fm_for_audio.conf "`pwd`/${OPT}"/*
-			mpo -input conf=input_with_last_fm_for_audio.conf  -playlist <(find "$PWD/$OPT" -type f \
+			if [ "x${OPT}" == "x. -shuffle" ]; then 
+				args="${args} -shuffle"; 
+			else
+				name=${OPT};
+			fi 
+    		last_fm_scrobble_on_mplayer_played_50_with_info &
+			mpo "$@" ${args} -input conf=input_with_last_fm_for_audio.conf  -playlist <(find "$PWD/$name" \
 			\( -iname "*\.mp3" -o -iname "*\.flac"  -o -iname "*\.m4a" -o -iname "*\.ogg"  -o -iname "*\.wma" \) )
 		fi
 		break;
