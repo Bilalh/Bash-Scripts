@@ -70,7 +70,7 @@ function mpm(){
 				name=${OPT};
 			fi 
     		last_fm_scrobble_on_mplayer_played_50_with_info &
-			mpo "$@" ${args} -input conf=input_with_last_fm_for_audio.conf  -playlist <(find "$PWD/$name" \
+			mpo "$@" ${args} -input conf=input_with_last_fm_for_audio.conf  -playlist <(find "$PWD/$name/"* \
 			\( -iname "*\.mp3" -o -iname "*\.flac"  -o -iname "*\.m4a" -o -iname "*\.ogg"  -o -iname "*\.wma" \) )
 		fi
 		break;
