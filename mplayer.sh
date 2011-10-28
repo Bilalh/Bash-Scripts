@@ -50,6 +50,7 @@ function mpn () {
 # Newer version of mpn allow shuffling, mplayer options and previous/next track
 function mpm(){
 	dir=${MPM_DIR:-$HOME/Movies/add/}
+	[ ! -d "$dir" ] && echo "'$dir' does not exist" && return  
 	cd "$dir" 
 	export USE_TAGINFO=true
 	export DISPLAY_TRACK_INFO=false
@@ -59,12 +60,12 @@ function mpm(){
 
 	export LC_ALL='C';
 	IFS=$'\x0a';
-	select OPT in `ls | grep -vP 'cover|ςbz|zoff alias| Renaming' | sort -bf` "." ". -shuffle" "Cancel"; do
+	select OPT in `ls | grep -vP 'cover|ςBbz|zoff alias| Renaming' | sort -bf` "." ". -shuffle" "Cancel"; do
 		unset LC_ALL
 		if [ "${OPT}" != "Cancel" ]; then
 			name=""; args=""
 			if [ "$1x" == "-lx" ]; then ls -R "${OPT}"; shift; fi;
-			if [ "x${OPT}" == "x. -shuffle" ]; then 
+			if [ "x${OPT}" == "x-shuffle" ]; then 
 				args="${args} -shuffle"; 
 			else
 				name=${OPT};
@@ -82,13 +83,13 @@ function mpm(){
 alias n3='n 3'
 alias n2='n 2'
 alias n1='n 1'
-alias n0='n 0
-'
+alias n0='n 0'
 function n(){
 	num=${1:-3}
+	shift
 	MPM_DIR="$HOME/Movies/cache/${num}"
 	trap "unset MPM_DIR" SIGHUP SIGINT SIGTERM
-	mpm
+	mpm $@
 	unset MPM_DIR
 }
 
