@@ -106,13 +106,14 @@ function nm(){
 function mc (){
     echo "$*" > ~/.mplayer/pipe
 }
+alias mn='mc pt_step 1; audio_info_display.rb'
  
 function mo (){
     num=$1
     [ $# -lt 1 ] && num=5
     tail -n${num} ~/.mplayer/output
 }
- 
+
 function mco(){
     mc "$*"
     sleep 0.2
