@@ -3,7 +3,6 @@
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias back='cd "$OLDPWD"'
 
 alias open.="open ."
 alias open..="open .."

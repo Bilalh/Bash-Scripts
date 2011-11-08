@@ -1,8 +1,5 @@
 
 
-alias gts="git status"
-alias gl="git log"
-
 function glg(){
     git log --graph --pretty="%ai %an - %s"
 }
@@ -14,6 +11,7 @@ function glp(){
 }
 
 function git_config_settings() {
+	git config user.name  "Bilal Hussain"
 	git config alias.b    branch
 	git config alias.lg   "log --graph --pretty=format:'%Cred%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --date=relative"
 	git config alias.ld   "log --graph --pretty=format:'%Cred%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai)%Creset'"

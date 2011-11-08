@@ -2,7 +2,7 @@
 
 alias hidetex="SetFile -a V *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.toc"
 alias showtex="SetFile -a v *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.toc"
-alias rmtex="rm *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.toc"
+alias rm_tex="rm *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.toc"
 
 
 alias ip="ifconfig | grep -P '\b(?:\d{1,3}\.){3}\d{1,3}\b ' -om 2 | tail -rn 1"
@@ -17,6 +17,7 @@ alias tmrl="osascript -e 'tell app \"TextMate\" to reload bundles'"
 
 alias scrsrdesk='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
 
+alias fix_names="fix_names.rb --excludes=' Renaming, ςbz, appb.app, Move.app, op.app, Renaming.app'"
 
 alias get_subs='java -jar ~/bin/googlesub/Google2SRT.jar'
 alias todo="less ~/Desktop/TODO.txt"
