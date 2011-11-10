@@ -21,3 +21,4 @@ alias fix_names="fix_names.rb --excludes=' Renaming, ςbz, appb.app, Move.app, o
 
 alias get_subs='java -jar ~/bin/googlesub/Google2SRT.jar'
 alias todo="less ~/Desktop/TODO.txt"
+alias javad='javap -c -private '

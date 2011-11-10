@@ -10,14 +10,16 @@ alias open..="open .."
 
 function rcd {
 	num="`ls -d */ | egrep -i \"$1\" -c`"
+
 	if [ $num -eq 1 ]; then
 		cd "`ls -d */ | egrep -i \"$1\" `"
 		pwd
 	elif [ $num -eq 0 ]; then
 		echo ""
 	elif [ $num -lt 30 ]; then
-		select NAME in `ls -d */ | egrep -i "$1" | sed 's/ /§/'`; do
-			cd "${NAME/§/ }"
+		IFS=$'\x0a';
+		select NAME in `ls -d */ | egrep -i "$1"`; do
+			cd "${NAME}"
 			pwd
 			break	
 		done
