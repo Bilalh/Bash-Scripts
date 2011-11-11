@@ -93,7 +93,23 @@ function n(){
 	unset MPM_DIR
 }
 
- 
+function _nlist(){
+	_comp_dir="$HOME/Movies/cache/"
+	ls -1 ${_comp_dir}	
+}
+
+function _ncomp {
+	local curw
+	COMPREPLY=()
+	curw=${COMP_WORDS[COMP_CWORD]}
+	COMPREPLY=($(compgen -W '`_nlist`' -- $curw))
+	return 0
+}
+
+#  Completion for n comand
+shopt -s progcomp
+complete -F _ncomp n
+
 alias mstart='last_fm_scrobble_on_mplayer_played_50'
 function mend(){
     killall last_fm_scrobble_on_mplayer_played_50 last_fm_scrobble_on_mplayer_played_50_with_info
