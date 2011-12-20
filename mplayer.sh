@@ -95,7 +95,7 @@ function n(){
 
 function _nlist(){
 	_comp_dir="$HOME/Movies/cache/"
-	ls -1 ${_comp_dir}	
+	ls ${_comp_dir}	
 }
 
 function _ncomp {
@@ -116,11 +116,11 @@ function mend(){
     kill $(ps aux | grep lastfmsubmitd | grep -v grep  | awk '{print $2}');
 }
 
-function nm(){
+function nnm(){
 	num=${1:-3}
 	MPN_DIR="$HOME/Movies/cache/${num}/"
 	trap "unset MPN_DIR" SIGHUP SIGINT SIGTERM
-	mpn
+	mpnn
 	unset MPN_DIR
 }
 
@@ -129,7 +129,7 @@ function nm(){
 # works with unicode and whitespace
 # Ctrl-\ to quit
 # can not be a script since it will not display more then one column
-function mpn () {
+function mpnn () {
 	scrobber=${MPLAYER_LASTFM:-mplayerlastfm.sh}	
 	dir=${MPN_DIR:-$HOME/Movies/add/}
 	cd "$dir" 

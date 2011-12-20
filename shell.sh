@@ -15,3 +15,7 @@ function spacesToUnderscore () {
 function fixLines () {
 	perl -pi~ -e 's/\r\n?/\n/g' "$@" ; 
 }
+
+updateTimestamps(){
+	find .  -exec touch '{}' +
+}

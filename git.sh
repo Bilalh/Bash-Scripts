@@ -37,4 +37,4 @@ function git_init () {
     git commit -am first\ commit
 }
 
-
+alias gi='vim .gitignore'

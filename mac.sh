@@ -43,3 +43,26 @@ function cdf (){
 	pushd "$currFolderPath" &> /dev/null
 	pwd
 }
+
+
+
+function i(){
+	itunes.sh "$@"
+}
+
+function _ilist(){
+	itunes.sh commands
+}
+
+function _icomp(){
+	local curw
+	COMPREPLY=()
+	curw=${COMP_WORDS[COMP_CWORD]}
+	COMPREPLY=($(compgen -W '`_ilist`' -- $curw))
+	return 0
+}
+
+#  Completion for itunes.sh
+shopt -s progcomp
+complete -F _icomp i
+
