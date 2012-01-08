@@ -18,6 +18,7 @@ alias tmrl="osascript -e 'tell app \"TextMate\" to reload bundles'"
 alias scrsrdesk='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
 
 alias fix_names="fix_names.rb --excludes=' Renaming, ςbz, appb.app, Move.app, op.app, Renaming.app'"
+alias fix_video_names="fix_names '*.mkv'"
 
 alias get_subs='java -jar ~/bin/googlesub/Google2SRT.jar'
 alias todo="less ~/Desktop/TODO.txt"

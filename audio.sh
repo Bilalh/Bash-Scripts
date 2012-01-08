@@ -1,5 +1,12 @@
 #!/bin/bash
 
+
+function artists(){
+	for i in $1; do  
+		mediainfo "$i" | grep 'Performer' | sed -e 's/.*: //'  ; 
+	done
+}
+
 function nn(){
 	num=${1:-3}
 	www "zselect${num}"

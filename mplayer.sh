@@ -11,7 +11,7 @@ function mc (){
 }
 
 alias  p='mc pause'
-alias mn='mc pt_step 1; audio_info_display.rb'
+alias n='mc pt_step 1; audio_info_display.rb'
 alias m5="mc seek -5" 
 alias m0="mc seek -10" 
 
@@ -80,12 +80,13 @@ function mpm(){
 	cd "$OLDPWD"
 }
 
-alias n3='n 3'
-alias n2='n 2'
-alias n1='n 1'
-alias n0='n 0'
-function n(){
-	num=${1:-3}
+alias m4='n 3'
+alias m3='n 3'
+alias m2='n 2'
+alias m1='n 1'
+alias m0='n 0'
+function m(){
+	num=${1:-4}
 	shift
 	MPM_DIR="$HOME/Movies/cache/${num}"
 	trap "unset MPM_DIR" SIGHUP SIGINT SIGTERM
@@ -93,22 +94,22 @@ function n(){
 	unset MPM_DIR
 }
 
-function _nlist(){
+function _mlist(){
 	_comp_dir="$HOME/Movies/cache/"
 	ls ${_comp_dir}	
 }
 
-function _ncomp {
+function _mcomp {
 	local curw
 	COMPREPLY=()
 	curw=${COMP_WORDS[COMP_CWORD]}
-	COMPREPLY=($(compgen -W '`_nlist`' -- $curw))
+	COMPREPLY=($(compgen -W '`_mlist`' -- $curw))
 	return 0
 }
 
 #  Completion for n comand
 shopt -s progcomp
-complete -F _ncomp n
+complete -F _mcomp m
 
 alias mstart='last_fm_scrobble_on_mplayer_played_50'
 function mend(){
