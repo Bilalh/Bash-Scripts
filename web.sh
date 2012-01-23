@@ -1,4 +1,5 @@
 alias wgetf="wget --input-file="
+alias wget_links='xargs wget --random-wait <<-EOF'
 
 function getyoutube(){
 	cd /tmp
@@ -9,4 +10,3 @@ function getyoutube(){
 	echo ${ans} | pbcopy
 	echo ${ans}
 }
-alias gety="getyoutube"

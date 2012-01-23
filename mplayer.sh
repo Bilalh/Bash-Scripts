@@ -11,7 +11,12 @@ function mc (){
 }
 
 alias  p='mc pause'
-alias n='mc pt_step 1; audio_info_display.rb'
+
+function n(){
+	amount=${1:-1}
+	mc pt_step $amount; audio_info_display.rb
+}
+
 alias m5="mc seek -5" 
 alias m0="mc seek -10" 
 

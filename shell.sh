@@ -19,3 +19,7 @@ function fixLines () {
 updateTimestamps(){
 	find .  -exec touch '{}' +
 }
+
+dot_files(){
+	ls -aF | grep  -v '/$' | grep '^\.'
+}
