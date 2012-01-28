@@ -1,3 +1,4 @@
+#!/bin/bash
 function resampleHeight(){
 	size=$1
 	shift
@@ -21,3 +22,12 @@ function coverBatch(){
 	resampleHeight 1200 "$@"
 	resample 75 "$@"
 }
+
+function crop_tile(){
+if [ $# -lt 1 ]; then 
+	echo "crop_tile src [mask] [rst]"
+	return 	
+fi
+	convert ${2:-mask.png} $1  -gravity center -compose atop -composite ${3:-${1%.*}-rst.png}
+}
+
