@@ -38,6 +38,10 @@ function mpo(){
 	unset USE_TAGINFO
 }
 
+function mopen(){
+	open -R "`mc get_property path; mo 5 | grep 'ANS_path=' | tail -n1 | sed -e 's/.*=//'`"
+}
+
 
 alias mpf="cdf; mp *"
 alias mpfl="cdf;ls; mp *"
@@ -85,11 +89,11 @@ function mpm(){
 	cd "$OLDPWD"
 }
 
-alias m4='n 3'
-alias m3='n 3'
-alias m2='n 2'
-alias m1='n 1'
-alias m0='n 0'
+alias m4='m 3'
+alias m3='m 3'
+alias m2='m 2'
+alias m1='m 1'
+alias m0='m 0'
 function m(){
 	num=${1:-4}
 	shift

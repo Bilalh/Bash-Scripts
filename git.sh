@@ -11,7 +11,7 @@ function glp(){
 }
 
 function git_config_settings() {
-	git config user.name  "Bilal Hussain"
+	git config user.name  "Bilal Syed Hussain"
 	git config alias.b    branch
 	git config alias.lg   "log --graph --pretty=format:'%Cred%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --date=relative"
 	git config alias.ld   "log --graph --pretty=format:'%Cred%an%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai)%Creset'"
@@ -38,3 +38,7 @@ function git_init () {
 }
 
 alias gi='vim .gitignore'
+
+function gitio(){
+	curl -i http://git.io -F "url=$1"  -F "code=$2"
+}

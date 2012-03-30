@@ -9,5 +9,11 @@ function letter_frequencies(){
 
 function ss(){
 	num=${1:-2}
-	ruby -e "puts '%s ' * ${num}"
+	ruby -e "print '%s ' * ${num}" | pbcopy
+	pbpaste
+	echo
+}
+
+function count_source(){
+	wc `ack -f $@` 2>/dev/null 
 }

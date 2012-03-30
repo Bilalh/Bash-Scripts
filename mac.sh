@@ -66,3 +66,6 @@ function _icomp(){
 shopt -s progcomp
 complete -F _icomp i
 
+function where(){
+	which $1 | pbcopy; open -R `pbpaste`
+}
