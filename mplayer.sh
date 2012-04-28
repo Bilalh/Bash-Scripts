@@ -63,13 +63,17 @@ function mpm(){
 	cd "$dir" 
 	export USE_TAGINFO=true
 	export DISPLAY_TRACK_INFO=false
-	trap "unset IFS; mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO;return" SIGHUP SIGINT SIGTERM 
+	export USE_INCREMENT=true
+	# export PLAYCOUNT_FILE="/Users/bilalh/Music/playcount.yaml"
+	trap "unset IFS; mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO;unset USE_INCREMENT; return" SIGHUP SIGINT SIGTERM 
+	# trap "unset IFS; mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO;unset USE_INCREMENT; unset PLAYCOUNT_FILE; return" SIGHUP SIGINT SIGTERM 
+
 		
 	killall last_fm_scrobble_on_mplayer_played_50_with_info &> /dev/null
 
 	export LC_ALL='C';
 	IFS=$'\x0a';
-	select OPT in `ls | grep -vP 'cover| ςbz|zoff alias| Renaming' | sort -bf` "." ". -shuffle" "Cancel"; do
+	select OPT in `ls | grep -vP 'cover| ?\ςbz| ?zoff alias| Renaming' | sort -bf` "." ". -shuffle" "Cancel"; do
 		unset LC_ALL
 		if [ "${OPT}" != "Cancel" ]; then
 			name=""; args=""
@@ -87,6 +91,10 @@ function mpm(){
 	done
 	unset IFS;
 	cd "$OLDPWD"
+	unset USE_TAGINFO
+	unset DISPLAY_TRACK_INFO
+	unset USE_INCREMENT
+	# unset PLAYCOUNT_FILE
 }
 
 alias m4='m 3'
@@ -98,9 +106,10 @@ function m(){
 	num=${1:-4}
 	shift
 	MPM_DIR="$HOME/Movies/cache/${num}"
-	trap "unset MPM_DIR" SIGHUP SIGINT SIGTERM
+	export PLAYCOUNT_FILE="/Users/bilalh/Music/itunes_playcount.yaml"
+	trap "unset MPM_DIR; unset PLAYCOUNT_FILE" SIGHUP SIGINT SIGTERM
 	mpm $@
-	unset MPM_DIR
+	unset MPM_DIR; unset PLAYCOUNT_FILE;
 }
 
 function _mlist(){
@@ -147,7 +156,7 @@ function mpnn () {
 
 	export LC_ALL='C';
 	IFS=$'\x0a';
-	select OPT in `ls | grep -vP 'cover| ςbz|zoff alias| Renaming' | sort -bf` "." "Cancel"; do
+	select OPT in `ls | grep -vP 'cover| ςbz|ςbz|zoff alias| Renaming' | sort -bf` "." "Cancel"; do
 		unset LC_ALL
 		if [ "${OPT}" != "Cancel" ]; then
 			if [ "$1x" == "-lx" ]; then ls -R "${OPT}"; shift; fi;
