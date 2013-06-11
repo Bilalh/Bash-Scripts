@@ -1,6 +1,3 @@
-# Commands 1
-#---------------------------------------------------------------------#
-
 
 function dotc () {
 	mkdir -p pdf
@@ -9,11 +6,6 @@ function dotc () {
 		a=`echo ${i} |sed 's/.dot//g'`
 		dot -Tpdf $i -o  pdf/$a.pdf 
 	done
-}
-
-
-function findword () {
-	/usr/bin/grep ^"$@"$ /usr/share/dict/words ; 
 }
 
 function bcalc() { echo "${*}"|bc -l; } 

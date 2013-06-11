@@ -1,4 +1,5 @@
 #!/bin/bash
+alias ii="open ."
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -27,10 +28,3 @@ function rcd {
 		echo "Too many items - $num"
 	fi
 }
-
-alias gd="grepdir"
-function grepdir () {
-	grep -Pn "$1" *
-}
-
-alias tmp="cd /tmp"

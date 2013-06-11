@@ -13,21 +13,22 @@ function resample(){
 
 function cover(){
 	filename="`gf`"
-	resampleHeight 1200 "$filename"
-	
-	resample 75 "$filename"
+	[ $(getImageHeight) -gt 1536 ] && resampleHeight 1536 "$filename"
+	resample 80 "$filename"
 }
+
 
 function coverBatch(){
-	resampleHeight 1200 "$@"
-	resample 75 "$@"
+	resampleHeight 1536 "$@"
+	resample 80 "$@"
 }
 
-function crop_tile(){
-if [ $# -lt 1 ]; then 
-	echo "crop_tile src [mask] [rst]"
-	return 	
-fi
-	convert ${2:-mask.png} $1  -gravity center -compose atop -composite ${3:-${1%.*}-rst.png}
+function getImageHeight(){
+	filename=""
+	if [ $# -lt 1 ]; then 
+		filename="`gf`"
+	else
+		filename="$1"
+	fi
+	sips -g pixelHeight  "$filename" | tail -n1 |  egrep -o '[0-9]+'
 }
-

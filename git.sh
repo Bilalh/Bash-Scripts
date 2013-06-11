@@ -20,6 +20,7 @@ function git_config_settings() {
 	git config alias.p    push
 	git config alias.c    commit 
 	git config alias.ca   'commit -am'
+	git config alias.cam  'commiti --amend -am'
 	git config alias.s    status
 	git config alias.d    describe
 	

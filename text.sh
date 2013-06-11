@@ -15,5 +15,5 @@ function ss(){
 }
 
 function count_source(){
-	wc `ack -f $@` 2>/dev/null 
+  wc `ack --ignore-dir=dist -f $@` 2> /dev/null	
 }

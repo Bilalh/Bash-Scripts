@@ -1,6 +1,4 @@
 #!/bin/bash
-# Commands 2
-
 
 function cleanh () {
 	cat .bash_history | grep -vP "^(op|ax|ml|mal|mai|ax|mp|mm)(.*)?" >._bash_history

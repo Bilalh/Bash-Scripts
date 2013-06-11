@@ -11,7 +11,7 @@ See the script for details
 
 Install 
 -------
-* Source from your .bashrc
+* Source from your .bashrc or .zshrc
 
 Issues
 ------
@@ -23,4 +23,4 @@ Licence
 
 Authors
 -------
-* Bilal Hussain
+* Bilal Syed Hussain

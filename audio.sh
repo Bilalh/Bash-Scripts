@@ -28,7 +28,7 @@ function www (){
 
 function bit_rates (){
 	IFS=$'\x0a'; 
-	for i in `ack_music -g .`; do 
+	for i in `ack_music  --music -g .`; do 
 		afinfo "$i" | grep 'bit rate'; 
 	done; 
 	unset IFS
@@ -58,13 +58,13 @@ function afr(){
 # bit rate of every audio file in a directory
 function brd () {
 	IFS=$'\x0a';	
-	for i in `ack_music -g .` ; do
+	for i in `ack_music --music -g .` ; do
 	unset IFS
-		printf "\033[0m\033[34m%-60s\033[0m \033[0m\033[32m" "$i";
-		info="`mediainfo \"$i\" | grep -A12 '^Audio' | grep -iP '^Bit rate( mode)?'`"
-		a="`echo \"$info\" | grep -oP '\d+.*' `"
+		printf "\033[0m\033[34m%-65s\033[0m \033[0m\033[32m" "$i";
+		info="`mediainfo \"$i\" | grep -A12 '^Audio' | egrep -i '^Bit rate( mode)?'`"
+		a="`echo \"$info\" | egrep -o '\d+.*' `"
 		printf "%s " "$a"
-		echo "$info" | grep -oP '\w+ (?=Bit rate)'
+		# echo "$info" | egrep -o '\d+'
 		printf "\033[0m\n"
 	done
 	echo

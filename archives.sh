@@ -1,4 +1,6 @@
 
+alias ext="extract"
+alias extf='extract "`gf`"'
 function extract() {
      if [ -f ""$1"" ] ; then
          case ""$1"" in
@@ -21,21 +23,5 @@ function extract() {
 }
 
 function cbzc () {
-	for i in *; do
-		 zip -rq "$i".cbz "$i"  ; 
-	done;
+	parallel 'zip -rq {1/.}.cbz {1} ' ::: "`ls -d *`"
 }
-
-function cbzr () {
-	for j in *; do 
-		cd "$j";  
-		for i in *; do
-			 zip -rq "$i".cbz "$i"  ; 
-			 mv "$i" ../;
-		done; 
-
-		cd $OLDPWD; 
-	done;
-}
-
-alias ext="extract"
