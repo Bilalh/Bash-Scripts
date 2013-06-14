@@ -2,7 +2,6 @@
 function battery () {
 	ioreg -l | grep -i capacity | tr '\n' ' | ' | awk '{printf("%.2f%%\n", $10/$5 * 100)}'
 }
-alias bat="battery"
 
 
 function ql () {
@@ -16,7 +15,6 @@ function ql () {
 
 alias qlr="qlmanage -r"
 
-alias o.="open ."
 
 function cdf (){
 	# cdf: cd's to frontmost window of Finder

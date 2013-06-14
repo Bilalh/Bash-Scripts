@@ -34,6 +34,7 @@ alias cp_gitignore='cp  ~/.gitignore .'
 function git_init () {
     git init
 	git_config_settings
+	git config user.email bh246@st-andrews.ac.uk
     git add .
     git commit -am first\ commit
 }

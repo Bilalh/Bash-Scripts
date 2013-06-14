@@ -1,9 +1,5 @@
 
-function addext(){
-	for i in *; do mv "$i" "${i}.${1}"; done	
-}
 
-alias mi="mediainfo"
 function mif () {
 	mediainfo "`gf`"
 }

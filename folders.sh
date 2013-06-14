@@ -5,6 +5,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+alias o.="open ."
 alias open.="open ."
 alias open..="open .."
 
