@@ -12,7 +12,7 @@ cf(){
 
 function ca(){
 	local _sdir="${2:-`gf`}"
-	__sdir=""
+	local __sdir=""
 	if [[ ${_sdir: -7} == ".eprime" || ${_sdir: -9} == ".solution" ||  ${_sdir: -6} == ".param" ]]; then
 		__sdir="`dirname ${_sdir}`";
 	else
@@ -48,7 +48,7 @@ function ca(){
 #   Works on the essence file or the directory and automatic uses a param file if needed
 function srf(){
 	local _sdir="${1:-`gf`}"
-	__sdir=""
+	local __sdir=""
 	if [[ ${_sdir: -7} == ".eprime" || ${_sdir: -9} == ".solution" ||  ${_sdir: -6} == ".param" ]]; then
 		__sdir="`dirname ${_sdir}`";
 	else
@@ -66,23 +66,23 @@ function srf(){
 
 # Converts all the eprime solutions back to essence.
 function csf(){
-	_sdir="${1:-`gf`}"
+	local _sdir="${1:-`gf`}"
 	ls -1 ${_sdir%.*}/*.eprime.solution | parallel -j+0  'echo -e "\n***	{}	***";  conjure-solution.sh {}'
 }
 
 function csfo(){
-	_sdir="`gf`"
+	local _sdir="`gf`"
 	ls -1 ${_sdir%.*}/*.eprime.solution | parallel -j+0  'echo -e "\n***	{}	***";  conjure-solution-Old.sh {}'
 }
 
 
 # Make a param file in the selected directory.
 function mkp(){
-	_sdir="`gf`"
+	local _sdir="`gf`"
 	if [[ ${_sdir: -7} == ".eprime" || ${_sdir: -9} == ".solution" ||  ${_sdir: -6} == ".param" ]]; then
-		__sdir="`dirname ${_sdir}`";
+		local __sdir="`dirname ${_sdir}`";
 	else
-		__sdir="${_sdir%.*}/"
+		local __sdir="${_sdir%.*}/"
 	fi
 	local _base="$(basename ${__sdir} )"
 	mkparam "$@" > "${__sdir}/${_base}.param"
@@ -90,7 +90,7 @@ function mkp(){
 }
 
 function mk2(){
-	_sdir="`gf`"
+	local _sdir="`gf`"
 	if [[ ${_sdir: -7} == ".eprime" || ${_sdir: -9} == ".solution" ||  ${_sdir: -6} == ".param" ]]; then
 		__sdir="`dirname ${_sdir}`";
 	else
@@ -126,11 +126,15 @@ function upt(){
 }
 
 function gh(){
-	g c; ghci -isrc "src/Language/E/Up/testing/Debuging.hs" -XOverloadedStrings -XTemplateHaskell -XQuasiQuotes -DUP_DEBUG
+	g c; ghci -isrc "src/Language/E/Up/testing/Debuging.hs" -XOverloadedStrings -XTemplateHaskell -XQuasiQuotes -DUP_DEBUG $*
 }
 
 function gr(){
-	g c; ghci -isrc src/Language/E/GenerateRandomParam.hs -XOverloadedStrings -XTemplateHaskell -XQuasiQuotes -DUP_DEBUG
+	g c; ghci -isrc src/Language/E/GenerateRandomParam.hs -XOverloadedStrings -XTemplateHaskell -XQuasiQuotes -DUP_DEBUG $*
+}
+
+function gp(){
+	ghci -i/Users/bilalh/CS/conjure/src /Users/bilalh/CS/conjure/src/Language/E/GenerateParams.hs -XOverloadedStrings -XTemplateHaskell -XQuasiQuotes -DUP_DEBUG $*
 }
 
 function addEssenceToEmpty(){

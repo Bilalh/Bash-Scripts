@@ -9,7 +9,7 @@ alias o.="open ."
 alias open.="open ."
 alias open..="open .."
 
-alias r='rcd'
+alias re='rcd'
 function rcd {
 	num="`ls -d */ | egrep -i \"$1\" -c`"
 

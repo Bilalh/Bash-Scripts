@@ -20,7 +20,7 @@ function git_config_settings() {
 	git config alias.p    push
 	git config alias.c    commit 
 	git config alias.ca   'commit -am'
-	git config alias.cam  'commiti --amend -am'
+	git config alias.cam  'commit --amend -am'
 	git config alias.s    status
 	git config alias.d    describe
 	
@@ -43,4 +43,12 @@ alias gi='vim .gitignore'
 
 function gitio(){
 	curl -i http://git.io -F "url=$1"  -F "code=$2"
+}
+
+function git_date(){
+	git ca "`ndatestamp`"
+}
+
+function ggi() { 
+	curl http://gitignore.io/api/$@ ;
 }

@@ -1,7 +1,7 @@
 # Commands alias
 
-alias hidetex="SetFile -a V *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.toc"
-alias showtex="SetFile -a v *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.toc"
+alias hidetex="SetFile -a V *.pdfsync *.log *.bbl *.aux *.blg  *.synctex.* *.fdb* *.out *.toc *.bbl *.blg"
+alias showtex="SetFile -a v *.pdfsync *.log *.bbl *.aux *.blg  *.synctex.* *.fdb* *.out *.toc *.bbl *.blg"
 alias rm_tex="rm *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.toc"
 
 
