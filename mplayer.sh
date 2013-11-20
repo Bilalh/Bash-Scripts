@@ -29,7 +29,7 @@ function mco(){
 
 function mpo(){
 	export USE_TAGINFO=true
-	trap "unset USE_TAGINFO" SIGHUP SIGINT SIGTERM
+	#trap "unset USE_TAGINFO; return" SIGHUP SIGINT SIGTERM
 	local conf=~/.mpv/input_with_last_fm.conf
 	local pipe=~/.mplayer/pipe
 	echo "mpv -quiet -input conf=${conf}  -input file=${pipe} $@ 2>&1  | tee ~/.mplayer/output | grep '^#' " 
@@ -43,13 +43,13 @@ function mpo(){
 # works with unicode and whitespace
 # can not be a script since it will not display more then one column
 function mpm(){
-	dir=${MPM_DIR:-$HOME/Movies/add/}
+	local dir=${MPM_DIR:-$HOME/Movies/add/}
 	[ ! -d "$dir" ] && echo "'$dir' does not exist" && return  
-	cd "$dir" 
+	pushd "$dir" 
 	export USE_TAGINFO=true
 	export DISPLAY_TRACK_INFO=false
 	export USE_INCREMENT=true
-	trap "unset IFS; mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO;unset USE_INCREMENT; return" SIGHUP SIGINT SIGTERM 
+	trap "popd; unset LC_ALL; unset IFS; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO;unset USE_INCREMENT; return" SIGHUP SIGINT SIGTERM 
 
 	killall last_fm_scrobble_on_mplayer_played_50_with_info &> /dev/null
 
@@ -66,13 +66,14 @@ function mpm(){
 			fi 
     		last_fm_scrobble_on_mplayer_played_50_with_info &
 			local conf=~/.mpv/input_with_last_fm_for_audio.conf
+			trap "popd; unset IFS; mend; unset USE_TAGINFO; unset DISPLAY_TRACK_INFO;unset USE_INCREMENT; return" SIGHUP SIGINT SIGTERM 
 			mpo "$@" ${args} --no-video -input conf=${conf}  -playlist <(find "$PWD/$name/"* \
 			\( -iname "*\.mp3" -o -iname "*\.m4a"  -o -iname "*\.flac" -o -iname "*\.ogg"  -o -iname "*\.wma"  \) )
 		fi
 		break;
 	done
 	unset IFS;
-	cd "$OLDPWD"
+	popd
 	unset USE_TAGINFO
 	unset DISPLAY_TRACK_INFO
 	unset USE_INCREMENT
@@ -150,4 +151,5 @@ alias mstart='last_fm_scrobble_on_mplayer_played_50'
 function mend(){
     killall last_fm_scrobble_on_mplayer_played_50 last_fm_scrobble_on_mplayer_played_50_with_info
     kill $(ps aux | grep lastfmsubmitd | grep -v grep  | awk '{print $2}');
+	trap - SIGHUP SIGINT SIGTERM;
 }
