@@ -31,3 +31,19 @@ function length () {
 function vif(){
 	mif | ggrep  -P "Video\n" -A25  
 }
+
+function to_mkv(){
+	if  [ !  $# -eq 1 ]; then
+		echo "$0 video"
+		return
+	fi
+	ffmpeg -i "$1" -vcodec copy -acodec copy "${1%.*}.mkv"
+}
+
+function mkvUID(){
+	parallel --keep-order --tag "mkvinfo {} | grep -i '+ Segment UID' | sed -e 's/0x//g' | grep -o ' [0-9A-Fa-f].*'  " ::: *.mkv
+}
+
+function mkvTimes(){
+	parallel --keep-order --tag " mkvinfo  {} | grep 'Duration' | grep -o '(.*' | sed -e 's/[()]//g'" ::: *.mkv
+}
