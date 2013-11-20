@@ -7,8 +7,6 @@ alias rm_tex="rm *.pdfsync *.log *.bbl *.aux *.blg  *.synctex* *.fdb* *.out *.to
 
 alias ip="ifconfig | grep -P '\b(?:\d{1,3}\.){3}\d{1,3}\b ' -om 2 | tail -rn 1"
 
-alias consoleapp='/Applications/Utilities/Console.app/Contents/MacOS/Console &'
-
 alias cleart="printf %b '\033c'"
 
 alias fix_names="fix_names.rb --excludes=' Renaming, ςbz, appb.app, Move.app, op.app, Renaming.app'"

@@ -75,11 +75,6 @@ function aac_to_mp3(){
 	faad -o - "$1" | lame - "${1%.m4a}.mp3"
 }
 
-N900="/Volumes/NOKIA_N900"
-function n900_sync (){
-	itunes_sync "${N900}/Music/" $* | tee "${N900}/Music/_logs/`date +'%Y-%m-%d_%s.log'`"
-}
-
 function itunes_sync () {
 	cd "/Users/bilalh/Programming/Projects/Audio-Sync/" 
 	macruby itunes_sync.rb $*

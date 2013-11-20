@@ -7,9 +7,3 @@ function dotc () {
 		dot -Tpdf $i -o  pdf/$a.pdf 
 	done
 }
-
-function bcalc() { echo "${*}"|bc -l; } 
-
-function count () {
-	echo "$*" | wc
-}
